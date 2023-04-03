@@ -78,25 +78,57 @@
       const btn_clear = document.querySelector("#clear");
       const display = document.querySelector("#display");
 
-      let a = "";
+      const btn_add = document.querySelector("#add");
+      const btn_subtract = document.querySelector("#subtract");
+      const btn_multiply = document.querySelector("#multiply");
+      const btn_divide = document.querySelector("#divide");
+      const btn_equals = document.querySelector("#equals");
 
+      let first_number = "";
+      let next_number = "";
+      let operation = "";
+      let sum = 0;
+
+      const displayNumber = (number) => {
+        next_number = next_number + number;
+        display.innerHTML = next_number;
+      };
+
+      const clearAll = () => {
+        first_number = "";
+        next_number = "";
+        display.innerHTML = first_number;
+      };
+
+      const add = () => {
+        operation = "add";
+        first_number = next_number;
+        next_number = "";
+      };
+
+      const subtract = () => {};
+      const multiply = () => {};
+      const divide = () => {};
+
+      const equals = () => {
+        if (operation == "add") {
+          sum = parseInt(first_number) + parseInt(next_number);
+          console.log(sum);
+          display.innerHTML = sum;
+        }
+      };
+
+      btn_clear.addEventListener("click", clearAll);
+      btn_add.addEventListener("click", add);
+      btn_subtract.addEventListener("click", subtract);
+      btn_multiply.addEventListener("click", multiply);
+      btn_divide.addEventListener("click", divide);
+      btn_equals.addEventListener("click", equals);
       numbers.forEach((number) => {
         number.addEventListener("click", () =>
           displayNumber(number.textContent)
         );
       });
-
-      const displayNumber = (number) => {
-        a = a + number;
-        display.innerHTML = a;
-      };
-
-      const clearAll = () => {
-        a = "";
-        display.innerHTML = a;
-      };
-
-      btn_clear.addEventListener("click", clearAll);
     </script>
   </body>
 </html>
