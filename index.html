@@ -9,7 +9,7 @@
   <body>
     <header>Calculator</header>
     <div class="container">
-      <div class="display"></div>
+      <div id="display"></div>
       <div class="button-container">
         <button class="number">9</button>
         <button class="number">8</button>
@@ -44,7 +44,7 @@
         gap: 20px;
       }
 
-      .display {
+      #display {
         font-size: 45px;
         text-align: center;
         border: 2px solid black;
@@ -75,16 +75,28 @@
 
     <script>
       const numbers = document.querySelectorAll(".number");
+      const btn_clear = document.querySelector("#clear");
+      const display = document.querySelector("#display");
 
-      const displayNumber = (number) => {
-        console.log(parseInt(number));
-      };
+      let a = "";
 
       numbers.forEach((number) => {
         number.addEventListener("click", () =>
           displayNumber(number.textContent)
         );
       });
+
+      const displayNumber = (number) => {
+        a = a + number;
+        display.innerHTML = a;
+      };
+
+      const clearAll = () => {
+        a = "";
+        display.innerHTML = a;
+      };
+
+      btn_clear.addEventListener("click", clearAll);
     </script>
   </body>
 </html>
