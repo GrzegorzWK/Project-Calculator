@@ -84,10 +84,9 @@
       const btn_divide = document.querySelector("#divide");
       const btn_equals = document.querySelector("#equals");
 
-      let first_number = "";
+      let first_number = 0;
       let next_number = "";
       let operation = "";
-      let sum = 0;
 
       const displayNumber = (number) => {
         next_number = next_number + number;
@@ -95,26 +94,95 @@
       };
 
       const clearAll = () => {
-        first_number = "";
+        first_number = 0;
         next_number = "";
-        display.innerHTML = first_number;
+        display.innerHTML = "";
+        sum = 0;
       };
 
       const add = () => {
-        operation = "add";
-        first_number = next_number;
-        next_number = "";
+        if (next_number != "") {
+          if (first_number == 0) {
+            operation = "add";
+            first_number = next_number;
+            next_number = "";
+          } else {
+            first_number = operationFunc(operation);
+            next_number = "";
+            display.innerHTML = first_number;
+            operation = "add";
+          }
+        }
       };
 
-      const subtract = () => {};
-      const multiply = () => {};
-      const divide = () => {};
+      const subtract = () => {
+        if (next_number != "") {
+          if (first_number == 0) {
+            operation = "subtract";
+            first_number = next_number;
+            next_number = "";
+          } else {
+            first_number = operationFunc(operation);
+            next_number = "";
+            display.innerHTML = first_number;
+            operation = "subtract";
+          }
+        }
+      };
+
+      const multiply = () => {
+        if (next_number != "") {
+          if (first_number == 0) {
+            operation = "multiply";
+            first_number = next_number;
+            next_number = "";
+          } else {
+            first_number = operationFunc(operation);
+            next_number = "";
+            display.innerHTML = first_number;
+            operation = "multiply";
+          }
+        }
+      };
+
+      const divide = () => {
+        if (next_number != "") {
+          if (first_number == 0) {
+            operation = "divide";
+            first_number = next_number;
+            next_number = "";
+          } else {
+            first_number = operationFunc(operation);
+            next_number = "";
+            display.innerHTML = first_number;
+            operation = "divide";
+          }
+        }
+      };
+
+      const operationFunc = (operation) => {
+        if (operation == "add") {
+          return parseInt(first_number) + parseInt(next_number);
+        } else if (operation == "subtract") {
+          return parseInt(first_number) - parseInt(next_number);
+        } else if (operation == "multiply") {
+          return parseInt(first_number) * parseInt(next_number);
+        } else if (operation == "divide") {
+          return parseInt(first_number) / parseInt(next_number);
+        }
+      };
 
       const equals = () => {
-        if (operation == "add") {
-          sum = parseInt(first_number) + parseInt(next_number);
-          console.log(sum);
-          display.innerHTML = sum;
+        if (next_number != "") {
+          if (first_number == 0) {
+            return;
+          } else {
+            first_number = operationFunc(operation);
+            display.innerHTML = first_number;
+            next_number = first_number;
+            first_number = 0;
+            operation = "";
+          }
         }
       };
 
@@ -124,6 +192,7 @@
       btn_multiply.addEventListener("click", multiply);
       btn_divide.addEventListener("click", divide);
       btn_equals.addEventListener("click", equals);
+
       numbers.forEach((number) => {
         number.addEventListener("click", () =>
           displayNumber(number.textContent)
